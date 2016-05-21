@@ -48,6 +48,15 @@
 + (NSDictionary *)mj_objectClassInArray;
 
 /**
+ *  根据key-value对来确定实际的类
+ *
+ *  @param keyValues 字典
+ *
+ *  @return 实际应该使用的类
+ */
++ (Class)mj_realClassWithKeyValues:(id)keyValues;
+
+/**
  *  旧值换新值，用于过滤字典中的值
  *
  *  @param oldValue 旧值

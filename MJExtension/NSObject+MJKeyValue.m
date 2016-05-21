@@ -214,7 +214,14 @@ static NSNumberFormatter *numberFormatter_;
     if ([self isSubclassOfClass:[NSManagedObject class]] && context) {
         return [[NSEntityDescription insertNewObjectForEntityForName:NSStringFromClass(self) inManagedObjectContext:context] mj_setKeyValues:keyValues context:context];
     }
-    return [[[self alloc] init] mj_setKeyValues:keyValues];
+    
+    Class realClass = [self mj_realClassWithKeyValues:keyValues];
+    return [[[realClass alloc] init] mj_setKeyValues:keyValues];
+}
+
++ (Class)mj_realClassWithKeyValues:(id)keyValues
+{
+    return self;
 }
 
 + (instancetype)mj_objectWithFilename:(NSString *)filename
