@@ -12,6 +12,8 @@
 #import "NSObject+MJClass.h"
 #import "MJProperty.h"
 #import "MJFoundation.h"
+#import "MJExtensionConst.h"
+#import "MJMutableContainerSafeProxy.h"
 #import <objc/runtime.h>
 
 #pragma clang diagnostic push
@@ -35,11 +37,16 @@ static NSMutableDictionary *cachedPropertiesDict_;
 
 + (void)load
 {
-    replacedKeyFromPropertyNameDict_ = [NSMutableDictionary dictionary];
-    replacedKeyFromPropertyName121Dict_ = [NSMutableDictionary dictionary];
-    newValueFromOldValueDict_ = [NSMutableDictionary dictionary];
-    objectClassInArrayDict_ = [NSMutableDictionary dictionary];
-    cachedPropertiesDict_ = [NSMutableDictionary dictionary];
+#if MJExtensionApplyThreadSafePatch
+#define MJMutableDictionaryClass MJMutableContainerSafeProxy
+#else
+#define MJMutableDictionaryClass NSMutableDictionary
+#endif
+    replacedKeyFromPropertyNameDict_ = [MJMutableDictionaryClass dictionary];
+    replacedKeyFromPropertyName121Dict_ = [MJMutableDictionaryClass dictionary];
+    newValueFromOldValueDict_ = [MJMutableDictionaryClass dictionary];
+    objectClassInArrayDict_ = [MJMutableDictionaryClass dictionary];
+    cachedPropertiesDict_ = [MJMutableDictionaryClass dictionary];
 }
 
 + (NSMutableDictionary *)dictForKey:(const void *)key

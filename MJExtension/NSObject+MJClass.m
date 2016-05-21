@@ -10,6 +10,7 @@
 #import "NSObject+MJCoding.h"
 #import "NSObject+MJKeyValue.h"
 #import "MJFoundation.h"
+#import "MJMutableContainerSafeProxy.h"
 #import <objc/runtime.h>
 
 static const char MJAllowedPropertyNamesKey = '\0';
@@ -26,10 +27,16 @@ static NSMutableDictionary *ignoredCodingPropertyNamesDict_;
 
 + (void)load
 {
-    allowedPropertyNamesDict_ = [NSMutableDictionary dictionary];
-    ignoredPropertyNamesDict_ = [NSMutableDictionary dictionary];
-    allowedCodingPropertyNamesDict_ = [NSMutableDictionary dictionary];
-    ignoredCodingPropertyNamesDict_ = [NSMutableDictionary dictionary];
+#if MJExtensionApplyThreadSafePatch
+#define MJMutableDictionaryClass MJMutableContainerSafeProxy
+#else
+#define MJMutableDictionaryClass NSMutableDictionary
+#endif
+    allowedPropertyNamesDict_ = [MJMutableDictionaryClass dictionary];
+    ignoredPropertyNamesDict_ = [MJMutableDictionaryClass dictionary];
+    allowedCodingPropertyNamesDict_ = [MJMutableDictionaryClass dictionary];
+    ignoredCodingPropertyNamesDict_ = [MJMutableDictionaryClass dictionary];
+
 }
 
 + (NSMutableDictionary *)dictForKey:(const void *)key

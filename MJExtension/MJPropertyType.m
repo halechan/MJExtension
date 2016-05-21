@@ -10,13 +10,18 @@
 #import "MJExtension.h"
 #import "MJFoundation.h"
 #import "MJExtensionConst.h"
+#import "MJMutableContainerSafeProxy.h"
 
 @implementation MJPropertyType
 
 static NSMutableDictionary *types_;
 + (void)initialize
 {
+#if MJExtensionApplyThreadSafePatch
+    types_ = [MJMutableContainerSafeProxy dictionary];
+#else
     types_ = [NSMutableDictionary dictionary];
+#endif
 }
 
 + (instancetype)cachedTypeWithCode:(NSString *)code

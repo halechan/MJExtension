@@ -85,4 +85,6 @@ extern NSString *const MJPropertyTypeClass;
 extern NSString *const MJPropertyTypeSEL;
 extern NSString *const MJPropertyTypeId;
 
+#define MJExtensionApplyThreadSafePatch 1
+
 #endif

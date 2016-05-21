@@ -9,6 +9,7 @@
 #import "MJProperty.h"
 #import "MJFoundation.h"
 #import "MJExtensionConst.h"
+#import "MJMutableContainerSafeProxy.h"
 #import <objc/message.h>
 
 @interface MJProperty()
@@ -17,6 +18,19 @@
 @end
 
 @implementation MJProperty
+
+#if MJExtensionApplyThreadSafePatch
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _propertyKeysDict = [MJMutableContainerSafeProxy dictionary];
+        _objectClassInArrayDict = [MJMutableContainerSafeProxy dictionary];
+    }
+    return self;
+}
+
+#else
 
 #pragma mark - 懒加载
 - (NSMutableDictionary *)propertyKeysDict
@@ -34,6 +48,7 @@
     }
     return _objectClassInArrayDict;
 }
+#endif
 
 #pragma mark - 缓存
 + (instancetype)cachedPropertyWithProperty:(objc_property_t)property
