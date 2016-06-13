@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29C57AC71D0E63B9005CEF16 /* MJMutableContainerSafeProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 29C57AC61D0E63B9005CEF16 /* MJMutableContainerSafeProxy.m */; };
 		2D306F5D1B58A6650069910E /* MJExtensionConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D306F5C1B58A6650069910E /* MJExtensionConst.m */; };
 		2D306F601B5A24430069910E /* BaseObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D306F5F1B5A24430069910E /* BaseObject.m */; };
 		2D35374C1B24868D00D5B7A8 /* Dog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D35374B1B24868D00D5B7A8 /* Dog.m */; };
@@ -49,6 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		29C57AC51D0E63B9005CEF16 /* MJMutableContainerSafeProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJMutableContainerSafeProxy.h; sourceTree = "<group>"; };
+		29C57AC61D0E63B9005CEF16 /* MJMutableContainerSafeProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJMutableContainerSafeProxy.m; sourceTree = "<group>"; };
 		2D2ABF0B1A7127DC0016C673 /* main.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
 		2D306F5B1B58A6650069910E /* MJExtensionConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJExtensionConst.h; sourceTree = "<group>"; };
 		2D306F5C1B58A6650069910E /* MJExtensionConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJExtensionConst.m; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				2D4A0BEB1B25615600D323A7 /* MJFoundation.m */,
 				2D3E79551B878DFD003A2B27 /* MJDictionaryCache.h */,
 				2D3E79561B878DFD003A2B27 /* MJDictionaryCache.m */,
+				29C57AC51D0E63B9005CEF16 /* MJMutableContainerSafeProxy.h */,
+				29C57AC61D0E63B9005CEF16 /* MJMutableContainerSafeProxy.m */,
 				2D4A0BEC1B25615600D323A7 /* MJProperty.h */,
 				2D4A0BED1B25615600D323A7 /* MJProperty.m */,
 				2D581C7C1B7A2912006ACCEB /* MJPropertyKey.h */,
@@ -287,6 +292,7 @@
 				2D6CAFF81A5AA0BB00E2BA5E /* StatusResult.m in Sources */,
 				2D9CAF2E192FA6020011F500 /* main.m in Sources */,
 				2D581C811B7A2912006ACCEB /* MJPropertyType.m in Sources */,
+				29C57AC71D0E63B9005CEF16 /* MJMutableContainerSafeProxy.m in Sources */,
 				2D4B069E1AE7CFF300C1843E /* MJExtensionConfig.m in Sources */,
 				2D49F3211B2855EC008D5A72 /* Box.m in Sources */,
 				2D3537551B248D9B00D5B7A8 /* Book.m in Sources */,

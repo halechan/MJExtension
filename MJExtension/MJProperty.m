@@ -9,6 +9,7 @@
 #import "MJProperty.h"
 #import "MJFoundation.h"
 #import "MJExtensionConst.h"
+#import "MJMutableContainerSafeProxy.h"
 
 @interface MJProperty()
 @property (strong, nonatomic) NSMutableDictionary *propertyKeysDict;
@@ -17,21 +18,14 @@
 
 @implementation MJProperty
 
-#pragma mark - 懒加载
-- (NSMutableDictionary *)propertyKeysDict
+- (instancetype)init
 {
-    if (!_propertyKeysDict) {
-        _propertyKeysDict = [NSMutableDictionary dictionary];
+    self = [super init];
+    if (self) {
+        _propertyKeysDict = [MJMutableContainerSafeProxy dictionary];
+        _objectClassInArrayDict = [MJMutableContainerSafeProxy dictionary];
     }
-    return _propertyKeysDict;
-}
-
-- (NSMutableDictionary *)objectClassInArrayDict
-{
-    if (!_objectClassInArrayDict) {
-        _objectClassInArrayDict = [NSMutableDictionary dictionary];
-    }
-    return _objectClassInArrayDict;
+    return self;
 }
 
 #pragma mark - 缓存

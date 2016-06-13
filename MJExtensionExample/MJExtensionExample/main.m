@@ -31,6 +31,8 @@
 #import "Box.h"
 #import <CoreData/CoreData.h>
 
+void multiThreadTest();
+
 /** main函数 */
 int main(int argc, const char * argv[])
 {
@@ -51,6 +53,11 @@ int main(int argc, const char * argv[])
         execute(replacedKeyFromPropertyName121, @"统一转换属性名（比如驼峰转下划线）");
         execute(newValueFromOldValue, @"过滤字典的值（比如字符串日期处理为NSDate、字符串nil处理为@""）");
         execute(logAllProperties, @"使用NSLog打印模型的所有属性");
+        
+        execute(multiThreadTest, @"多线程测试");
+        while (YES) {
+            //
+        }
     }
     return 0;
 }
@@ -423,6 +430,87 @@ void logAllProperties()
     user.icon = @"test.png";
     
     NSLog(@"%@", user);
+}
+
+@interface A : NSObject
+
+@property (nonatomic, strong) NSString *a;
+@property (nonatomic, strong) NSString *a1;
+@property (nonatomic, strong) NSString *a2;
+@property (nonatomic, strong) NSString *a3;
+
+@end
+
+@interface B : NSObject
+
+@property (nonatomic, strong) NSString *b;
+@property (nonatomic, strong) NSString *b1;
+@property (nonatomic, strong) NSString *b2;
+@property (nonatomic, strong) NSString *b3;
+
+@end
+
+@interface C : NSObject
+
+@property (nonatomic, strong) NSString *c;
+@property (nonatomic, strong) NSString *c1;
+@property (nonatomic, strong) NSString *c2;
+@property (nonatomic, strong) NSString *c3;
+
+@end
+
+@implementation A
+
+MJCodingImplementation
+
+@end
+
+@implementation B
+
+MJCodingImplementation
+
+@end
+
+@implementation C
+
+MJCodingImplementation
+
+@end
+
+void dummyObj(id obj)
+{
+    NSLog(@"%@", obj);
+}
+
+void doTestWithClass(Class aClass)
+{
+    NSDictionary *dict = @{@"a" : @"a",
+                           @"b" : @"b",
+                           @"c" : @"c",
+                           @"a1" : @"a1",
+                           @"a2" : @"a2",
+                           @"a3" : @"a3",
+                           @"b1" : @"b1",
+                           @"b2" : @"b2",
+                           @"b3" : @"b3",
+                           @"c1" : @"c1",
+                           @"c2" : @"c2",
+                           @"c3" : @"c3"};
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        for (NSInteger i = 0; i < 10; i++) {
+            id oo = [aClass objectWithKeyValues:dict];
+            dummyObj(oo);
+        }
+    });
+}
+
+void multiThreadTest()
+{
+    for (NSInteger i = 0; i < 100; i++) {
+        doTestWithClass([A class]);
+        doTestWithClass([B class]);
+        doTestWithClass([C class]);
+    }
 }
 
 void execute(void (*fn)(), NSString *comment)

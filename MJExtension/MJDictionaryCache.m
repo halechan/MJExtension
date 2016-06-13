@@ -7,6 +7,7 @@
 //
 
 #import "MJDictionaryCache.h"
+#import "MJMutableContainerSafeProxy.h"
 #import <objc/runtime.h>
 
 @implementation MJDictionaryCache
@@ -15,8 +16,8 @@
     // 获得字典
     NSMutableDictionary *dict = [self dictWithDictId:dictId];
     if (dict == nil) {
-        dict = [NSMutableDictionary dictionary];
-        objc_setAssociatedObject(self, dictId, dict, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        dict = [MJMutableContainerSafeProxy dictionary];
+        objc_setAssociatedObject(self, dictId, dict, OBJC_ASSOCIATION_RETAIN);
     }
     
     // 存储数据
