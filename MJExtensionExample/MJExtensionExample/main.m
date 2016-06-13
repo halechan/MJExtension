@@ -84,7 +84,7 @@ void keyValues2object()
     User *user = [User objectWithKeyValues:dict];
 
     // 3.打印User模型的属性
-    NSLog(@"name=%@, icon=%@, age=%zd, height=%@, money=%@, sex=%d, gay=%d", user.name, user.icon, user.age, user.height, user.money, user.sex, user.gay);
+    NSLog(@"name=%@, icon=%@, age=%zd, height=%f, money=%@, sex=%d, gay=%d", user.name, user.icon, user.age, user.height, user.money, user.sex, user.gay);
 }
 
 /**
@@ -93,13 +93,13 @@ void keyValues2object()
 void keyValues2object1()
 {
     // 1.定义一个JSON字符串
-    NSString *jsonString = @"{\"name\":\"Jack\", \"icon\":\"lufy.png\", \"age\":20}";
+    NSString *jsonString = @"{\"name\":\"Jack\", \"icon\":\"lufy.png\", \"age\":20, \"height\":333333.7}";
 
     // 2.将JSON字符串转为User模型
     User *user = [User objectWithKeyValues:jsonString];
 
     // 3.打印User模型的属性
-    NSLog(@"name=%@, icon=%@, age=%d", user.name, user.icon, user.age);
+    NSLog(@"name=%@, icon=%@, age=%d, height=%@", user.name, user.icon, user.age, @(user.height));
 }
 
 /**
@@ -308,7 +308,7 @@ void object2keyValues()
     NSLog(@"%@", [stu keyValuesWithIgnoredKeys:@[@"bag", @"oldName", @"nowName"]]);
     NSLog(@"%@", stu.JSONString);
     
-    [Student referenceReplacedKeyWhenCreatingKeyValues:YES];
+    [Student referenceReplacedKeyWhenCreatingKeyValues:NO];
     NSLog(@"\n模型转字典时，字典的key参考replacedKeyFromPropertyName等方法:\n%@", stu.keyValues);
 }
 
@@ -356,7 +356,7 @@ void coreData()
         // 利用CoreData保存模型
         [context save:nil];
         
-        NSLog(@"name=%@, icon=%@, age=%zd, height=%@, money=%@, sex=%d, gay=%d", user.name, user.icon, user.age, user.height, user.money, user.sex, user.gay);
+        NSLog(@"name=%@, icon=%@, age=%zd, height=%f, money=%@, sex=%d, gay=%d", user.name, user.icon, user.age, user.height, user.money, user.sex, user.gay);
     } @catch (NSException *e) {
     
     }
